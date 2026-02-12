@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
   FolderGit2, Zap, Activity, RefreshCw, Shield, Terminal,
-  ArrowRight, Github, Download, ChevronRight, Sparkles
+  ArrowRight, Github, Download, ChevronRight, Sparkles,
+  Bot, GitBranch, Eye, Cpu,
 } from 'lucide-react'
 import GlassCard from '../components/GlassCard'
 import SectionHeading from '../components/SectionHeading'
@@ -45,10 +46,19 @@ const features = [
 ]
 
 const stats = [
-  { value: 'Unlimited', label: 'Active Repos' },
+  { value: '100%', label: 'Open Source' },
   { value: 'Real-time', label: 'Monitoring' },
-  { value: 'Zero', label: 'Downtime Goal' },
-  { value: 'Instant', label: 'Notifications' },
+  { value: '3+', label: 'AI Providers' },
+  { value: 'Zero', label: 'Config Required' },
+]
+
+/* Pipeline visual nodes */
+const pipelineNodes = [
+  { icon: GitBranch, label: 'Git Push', color: '#4ecdc4' },
+  { icon: Bot, label: 'AI Analyze', color: '#a855f7' },
+  { icon: Terminal, label: 'Build & Test', color: '#34d399' },
+  { icon: Shield, label: 'Security', color: '#ff6b9d' },
+  { icon: Zap, label: 'Deploy', color: '#f0a500' },
 ]
 
 export default function Home() {
@@ -58,7 +68,6 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center pt-16">
         {/* Background effects */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Gradient orbs */}
           <div
             className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full animate-glow-pulse"
             style={{
@@ -74,7 +83,6 @@ export default function Home() {
               animationDelay: '1.5s',
             }}
           />
-          {/* Grid pattern */}
           <div
             className="absolute inset-0"
             style={{
@@ -87,6 +95,9 @@ export default function Home() {
               WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent)',
             }}
           />
+          {/* Spinning orbit ring */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full animate-spin-slow opacity-10"
+            style={{ border: '1px solid rgba(168, 85, 247, 0.2)' }} />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -101,7 +112,7 @@ export default function Home() {
                   border: '1px solid rgba(78, 205, 196, 0.15)',
                 }}
               >
-                <Sparkles size={12} /> Now available for Windows
+                <Sparkles size={12} /> Now with AI Agent Teams
               </span>
             </motion.div>
 
@@ -110,7 +121,7 @@ export default function Home() {
               variants={fadeUp}
               className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-6"
             >
-              <span className="gradient-text">Automation</span>
+              <span className="gradient-text text-glow-purple">Automation</span>
               <br />
               <span style={{ color: 'rgba(255,255,255,0.9)' }}>Reimagined</span>
             </motion.h1>
@@ -133,7 +144,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="btn-primary text-base"
               >
-                <Download size={18} /> Download
+                <Download size={18} /> Download Free
               </a>
               <a
                 href="https://github.com/Exenye-Industries/LoopForge"
@@ -169,7 +180,7 @@ export default function Home() {
                   <div className="w-3 h-3 rounded-full" style={{ background: '#34d399' }} />
                 </div>
                 <span className="ml-3 text-xs font-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>
-                  LoopForge - Repositories
+                  LoopForge — Repositories
                 </span>
               </div>
               {/* Mock content */}
@@ -178,7 +189,7 @@ export default function Home() {
                   {['loopforge-website', 'api-service', 'deploy-config'].map((name, i) => (
                     <div
                       key={name}
-                      className="p-4 rounded-xl"
+                      className="p-4 rounded-xl transition-all duration-300 hover:scale-[1.02]"
                       style={{
                         background: 'rgba(255,255,255,0.02)',
                         border: '1px solid rgba(255,255,255,0.04)',
@@ -203,7 +214,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            {/* Glow beneath */}
             <div
               className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-20"
               style={{
@@ -255,6 +265,133 @@ export default function Home() {
             <Link to="/features" className="btn-secondary inline-flex items-center gap-2 text-sm">
               View all features <ArrowRight size={16} />
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Code Demo Section ── */}
+      <section className="py-24 relative" style={{ background: 'linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.015), transparent)' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionHeading
+            badge="Developer Experience"
+            title="Configure in code, deploy in seconds"
+            description="Declarative automation configs that are easy to read, version, and share."
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Code block */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="rounded-2xl overflow-hidden" style={{
+                background: 'rgba(0,0,0,0.5)',
+                border: '1px solid rgba(255,255,255,0.06)',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(168, 85, 247, 0.04)',
+              }}>
+                <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#ff5f57' }} />
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#febc2e' }} />
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#28c840' }} />
+                  </div>
+                  <span className="ml-2 text-[11px] font-mono text-lf-text-muted">loopforge.config.ts</span>
+                </div>
+                <div className="code-block !rounded-none !border-0 !bg-transparent text-[12.5px] leading-7">
+                  <div><span className="ln"> 1</span><span className="kw">import</span> {'{'} <span className="fn">defineWorkflow</span> {'}'} <span className="kw">from</span> <span className="str">'@loopforge/core'</span></div>
+                  <div><span className="ln"> 2</span></div>
+                  <div><span className="ln"> 3</span><span className="kw">export default</span> <span className="fn">defineWorkflow</span>({'{'})</div>
+                  <div><span className="ln"> 4</span>  name: <span className="str">'auto-deploy'</span>,</div>
+                  <div><span className="ln"> 5</span>  trigger: <span className="str">'on:push'</span>,</div>
+                  <div><span className="ln"> 6</span>  agent: <span className="str">'claude-opus'</span>,</div>
+                  <div><span className="ln"> 7</span></div>
+                  <div><span className="ln"> 8</span>  steps: [</div>
+                  <div><span className="ln"> 9</span>    {'{'} run: <span className="str">'lint'</span>,   cmd: <span className="str">'eslint .'</span> {'}'},</div>
+                  <div><span className="ln">10</span>    {'{'} run: <span className="str">'test'</span>,   cmd: <span className="str">'vitest run'</span> {'}'},</div>
+                  <div><span className="ln">11</span>    {'{'} run: <span className="str">'build'</span>,  cmd: <span className="str">'vite build'</span> {'}'},</div>
+                  <div><span className="ln">12</span>    {'{'} run: <span className="str">'deploy'</span>, target: <span className="str">'cloudflare'</span> {'}'},</div>
+                  <div><span className="ln">13</span>  ],</div>
+                  <div><span className="ln">14</span></div>
+                  <div><span className="ln">15</span>  <span className="cmt">// AI auto-fix on failure</span></div>
+                  <div><span className="ln">16</span>  onFailure: <span className="str">'agent:auto-repair'</span>,</div>
+                  <div><span className="ln">17</span>{'}'})</div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Feature bullets */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6 pt-4"
+            >
+              {[
+                { icon: Bot, title: 'AI-Powered Auto-Repair', desc: 'When builds break, LoopForge agents analyze the error, find the root cause, and submit a fix automatically.', color: '#a855f7' },
+                { icon: Sparkles, title: 'Zero-Config Detection', desc: 'Automatically detects your project type, test framework, and deployment target. Just push your code.', color: '#4ecdc4' },
+                { icon: Cpu, title: 'Multi-Provider AI', desc: 'Works with Claude, GPT-4, Gemini, and local models. Switch providers without changing workflows.', color: '#ff6b9d' },
+                { icon: Eye, title: 'Full Observability', desc: 'Live streaming logs, execution traces, and performance metrics for every pipeline run.', color: '#34d399' },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="flex gap-4"
+                >
+                  <div className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center"
+                    style={{ background: `${item.color}12`, border: `1px solid ${item.color}20` }}>
+                    <item.icon size={18} style={{ color: item.color }} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-white mb-1">{item.title}</h4>
+                    <p className="text-sm leading-relaxed text-lf-text-secondary">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pipeline Visual ── */}
+      <section className="py-16 relative">
+        <div className="max-w-5xl mx-auto px-6">
+          <SectionHeading
+            badge="Pipeline"
+            title="From push to production"
+            description="Every git push triggers an intelligent pipeline that builds, tests, scans, and deploys."
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap items-center justify-center gap-3 md:gap-2"
+          >
+            {pipelineNodes.map((node, i) => (
+              <div key={node.label} className="flex items-center gap-2 md:gap-3">
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.4 }}
+                  className="glass-card-static px-4 py-3 flex items-center gap-2.5"
+                >
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ background: `${node.color}15`, border: `1px solid ${node.color}25` }}>
+                    <node.icon size={16} style={{ color: node.color }} />
+                  </div>
+                  <span className="text-xs font-medium text-white whitespace-nowrap">{node.label}</span>
+                </motion.div>
+                {i < pipelineNodes.length - 1 && (
+                  <ChevronRight size={16} className="text-lf-text-muted hidden md:block" />
+                )}
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -331,7 +468,6 @@ export default function Home() {
       <section className="py-32 relative">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <GlassCard className="p-12 md:p-16 relative overflow-hidden">
-            {/* Background glow */}
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64"
               style={{
