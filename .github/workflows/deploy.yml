@@ -6,8 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,9 +38,12 @@ jobs:
         with:
           name: dist
           path: dist/
+          retention-days: 7
 
-  # Cloudflare Pages deploy (disabled until configured)
+  # Cloudflare Pages deployment - disabled until configured
+  # To enable: Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as repository secrets
   # deploy:
+  #   name: Deploy to Cloudflare Pages
   #   needs: build
   #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
   #   runs-on: ubuntu-latest
